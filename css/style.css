@@ -213,6 +213,7 @@ li + li {
 
 .avatar-hotspot {
     position: absolute;
+    z-index: 8;
     border: 0;
     background: transparent;
     border-radius: 10px;
@@ -232,25 +233,47 @@ li + li {
 }
 
 .hotspot-head {
-    width: 28%;
-    height: 20%;
-    left: 36%;
-    top: 9%;
+    width: 40%;
+    height: 40%;
+    left: 30%;
+    top: 5%;
 }
 
-.hotspot-hands {
-    width: 68%;
-    height: 20%;
-    left: 16%;
-    top: 50%;
+.hotspot-hand-left {
+    width: 16%;
+    height: 30%;
+    left: 17%;
+    top: 52%;
 }
 
-.hotspot-core {
-    width: 24%;
-    height: 24%;
-    left: 38%;
-    top: 38%;
+.hotspot-hand-right {
+    width: 16%;
+    height: 30%;
+    left: 67%;
+    top: 52%;
 }
+
+.hotspot-heart {
+    width: 20%;
+    height: 18%;
+    left: 40%;
+    top: 52%;
+}
+
+.hotspot-foot-left {
+    width: 15%;
+    height: 15%;
+    left: 32%;
+    top: 80%;
+}
+
+.hotspot-foot-right {
+    width: 15%;
+    height: 15%;
+    left: 53%;
+    top: 80%;
+}
+
 
 .skill-panel {
     max-width: 420px;
@@ -304,6 +327,40 @@ li + li {
     width: min(360px, 100%);
 }
 
+.music-widget {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(24, 24, 24, 0.88);
+    border: 1px solid #007acc;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.music-disc {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #4ec9b0 0 18%, #111 19% 58%, #007acc 59% 100%);
+    animation: spinDisc 1.6s linear infinite;
+}
+
+.music-name {
+    color: #d4d4d4;
+    font-family: Consolas, monospace;
+    font-size: 0.82rem;
+}
+
+@keyframes spinDisc {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 @media (max-width: 900px) {
     .container {
         width: 92%;
@@ -332,6 +389,12 @@ li + li {
     }
     .solo-stage {
         width: min(360px, 88vw);
+    }
+
+    .music-widget {
+        top: 8px;
+        left: 8px;
+        padding: 6px 10px;
     }
 }
 

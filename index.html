@@ -9,49 +9,46 @@
 
 <div id="welcome-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
     <div class="modal-card">
-        <h2 id="welcome-title">console.log("Hi, I'm Wynn - Builder & Thinker");</h2>
+        <h2 id="welcome-title">"Hi, I'm Wynn - Builder & Thinker"</h2>
         <p>Click the avatar zones to explore my skills</p>
         <button id="welcome-close" class="skill-link modal-close-btn">开始浏览</button>
     </div>
 </div>
 
+<div class="music-widget" aria-label="背景音乐">
+    <span class="music-disc" aria-hidden="true" style="cursor: pointer; user-select: none; margin-right: 8px;">🎵</span>
+    <span class="music-name">bgm.mp3</span>
+</div>
+<audio id="bgm-audio" autoplay loop preload="auto">
+    <source src="media/BabyShark.mp3" type="audio/mpeg">
+</audio>
+
 <header>
     <h1>Wynn 的多维度空间</h1>
-    <p>Pixel Avatar Interface</p>
 </header>
 
+
 <nav>
-    <a href="index.html" class="active">/root/首页</a>
-    <a href="css/project.html">/bin/项目实践</a>
-    <a href="css/about.html">/etc/关于我</a>
-    <a href="css/hobby.html">/home/兴趣爱好</a>
-    <a href="css/contact.html">/var/联系我</a>
+    <a href="index.html" class="active">首页</a>
+    <a href="css/about.html">关于我</a>
+    <a href="css/project.html">项目实践</a>
+    <a href="css/hobby.html">兴趣爱好</a>
+    <a href="css/contact.html">联系我</a>
 </nav>
 
 <div class="container">
-    <div class="view-marker">[FRONT VIEW - THE CORE]</div>
     <h2>人物中枢展示</h2>
-    <p>点击人物部位可查看对应能力：头部=智力，手部=动手，核心=兴趣驱动。</p>
 
     <div class="solo-stage">
-        <img src="images/pixel_avatar.svg" alt="Wynn像素人物（透明背景）" class="solo-avatar">
-        <button class="avatar-hotspot hotspot-head" data-part="head" aria-label="查看头部能力"></button>
-        <button class="avatar-hotspot hotspot-hands" data-part="hand" aria-label="查看手部能力"></button>
-        <button class="avatar-hotspot hotspot-core" data-part="core" aria-label="查看核心能力"></button>
+        <img src="images/pixel_avatar.svg" alt="像素人物" class="solo-avatar">
+        <button class="avatar-hotspot hotspot-head" data-part="head" aria-label="头部：跳转关于我"></button>
+        <button class="avatar-hotspot hotspot-hand-left" data-part="hand" aria-label="左手：跳转项目实践"></button>
+        <button class="avatar-hotspot hotspot-hand-right" data-part="hand" aria-label="右手：跳转项目实践"></button>
+        <button class="avatar-hotspot hotspot-heart" data-part="heart" aria-label="心部：跳转兴趣爱好"></button>
+        <button class="avatar-hotspot hotspot-foot-left" data-part="foot" aria-label="左脚：跳转联系我"></button>
+        <button class="avatar-hotspot hotspot-foot-right" data-part="foot" aria-label="右脚：跳转联系我"></button>
     </div>
 
-    <div id="skill-panel" class="skill-panel skill-panel-centered">
-        <h3 id="skill-title">[等待选择部位]</h3>
-        <p id="skill-content">点击人物部位后，这里会显示对应能力说明。</p>
-        <a id="skill-link" href="css/project.html" class="skill-link">前往对应页面</a>
-    </div>
-    
-    <div class="info-box">
-        <p class="audio-title">[BGM_Module_Loaded]:</p>
-        <audio controls loop class="bgm-player">
-            <source src="media/bgm.mp3" type="audio/mpeg">
-        </audio>
-    </div>
 </div>
 
 <footer>
@@ -62,29 +59,32 @@
     (function () {
         var welcomeModal = document.getElementById("welcome-modal");
         var welcomeClose = document.getElementById("welcome-close");
-        var panelTitle = document.getElementById("skill-title");
-        var panelContent = document.getElementById("skill-content");
-        var panelLink = document.getElementById("skill-link");
         var spots = document.querySelectorAll(".avatar-hotspot");
 
         var profileMap = {
             head: {
                 title: "[头部模块] 智力与逻辑",
                 content: "擅长算法思维、代码抽象和问题拆解，习惯先建模再迭代实现。",
-                link: "css/project.html",
-                label: "查看项目实践"
+                link: "css/about.html",
+                label: "查看关于我"
             },
             hand: {
                 title: "[手部模块] 动手与执行",
                 content: "注重实操落地，擅长环境配置、故障排查、前后端协同与硬件维护。",
-                link: "css/about.html",
-                label: "查看关于我"
+                link: "css/project.html",
+                label: "查看项目实践"
             },
-            core: {
+            heart: {
                 title: "[核心模块] 兴趣与持续力",
                 content: "兴趣驱动学习，持续关注新技术并通过项目沉淀能力与表达。",
                 link: "css/hobby.html",
                 label: "查看兴趣爱好"
+            },
+            foot: {
+                title: "[脚部模块] 连接与行动",
+                content: "重视沟通与行动闭环，欢迎直接建立联系。",
+                link: "css/contact.html",
+                label: "查看联系我"
             }
         };
 
@@ -113,8 +113,38 @@
         welcomeModal.addEventListener("click", function (event) {
             if (event.target === welcomeModal) closeWelcomeModal();
         });
+
+        var bgm = document.getElementById("bgm-audio");
+        function tryPlayBgm() {
+            if (!bgm) return;
+            bgm.play().catch(function () {});
+        }
+        tryPlayBgm();
+        document.addEventListener("pointerdown", tryPlayBgm, { once: true });
     })();
 </script>
+<script>
+    const audioSource = document.querySelector('#bgm-audio source');
+    const fullPath = audioSource.getAttribute('src');
+    const fileName = decodeURIComponent(fullPath.split('/').pop());
+    document.querySelector('.music-name').textContent = fileName;
+    const musicDisc = document.querySelector('.music-disc');
+    const audioPlayer = document.getElementById('bgm-audio');
+    audioPlayer.addEventListener('play', function() { 
+        musicDisc.textContent = '⏸ '; // 播放中显示暂停键
+    });
+    audioPlayer.addEventListener('pause', function() { 
+        musicDisc.textContent = '▶ '; // 暂停中显示播放键
+    });
+    musicDisc.textContent = audioPlayer.paused ? '▶ ' : '⏸ ';
 
+    musicDisc.addEventListener('click', function() {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+        } else {
+            audioPlayer.pause();
+        }
+    });
+</script>
 </body>
 </html>
