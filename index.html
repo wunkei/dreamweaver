@@ -7,9 +7,17 @@
 </head>
 <body>
 
+<div id="welcome-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <div class="modal-card">
+        <h2 id="welcome-title">console.log("Hi, I'm Wynn - Builder & Thinker");</h2>
+        <p>Click the avatar zones to explore my skills</p>
+        <button id="welcome-close" class="skill-link modal-close-btn">开始浏览</button>
+    </div>
+</div>
+
 <header>
-    <h1>System.out.println("Hello, I'm Wynn");</h1>
-    <p>Exploring Intellect and Skills Through a Pixel Avatar</p>
+    <h1>Wynn 的多维度空间</h1>
+    <p>Pixel Avatar Interface</p>
 </header>
 
 <nav>
@@ -23,10 +31,19 @@
 <div class="container">
     <div class="view-marker">[FRONT VIEW - THE CORE]</div>
     <h2>人物中枢展示</h2>
-    <p>中间仅保留人物主体，透明背景，人物放大展示，眼睛自动眨眼。</p>
+    <p>点击人物部位可查看对应能力：头部=智力，手部=动手，核心=兴趣驱动。</p>
 
     <div class="solo-stage">
         <img src="images/pixel_avatar.svg" alt="Wynn像素人物（透明背景）" class="solo-avatar">
+        <button class="avatar-hotspot hotspot-head" data-part="head" aria-label="查看头部能力"></button>
+        <button class="avatar-hotspot hotspot-hands" data-part="hand" aria-label="查看手部能力"></button>
+        <button class="avatar-hotspot hotspot-core" data-part="core" aria-label="查看核心能力"></button>
+    </div>
+
+    <div id="skill-panel" class="skill-panel skill-panel-centered">
+        <h3 id="skill-title">[等待选择部位]</h3>
+        <p id="skill-content">点击人物部位后，这里会显示对应能力说明。</p>
+        <a id="skill-link" href="css/project.html" class="skill-link">前往对应页面</a>
     </div>
     
     <div class="info-box">
@@ -40,6 +57,64 @@
 <footer>
     <p>&copy; 2026 Wynn. Code compiled smoothly. 设计于 Dreamweaver.</p>
 </footer>
+
+<script>
+    (function () {
+        var welcomeModal = document.getElementById("welcome-modal");
+        var welcomeClose = document.getElementById("welcome-close");
+        var panelTitle = document.getElementById("skill-title");
+        var panelContent = document.getElementById("skill-content");
+        var panelLink = document.getElementById("skill-link");
+        var spots = document.querySelectorAll(".avatar-hotspot");
+
+        var profileMap = {
+            head: {
+                title: "[头部模块] 智力与逻辑",
+                content: "擅长算法思维、代码抽象和问题拆解，习惯先建模再迭代实现。",
+                link: "css/project.html",
+                label: "查看项目实践"
+            },
+            hand: {
+                title: "[手部模块] 动手与执行",
+                content: "注重实操落地，擅长环境配置、故障排查、前后端协同与硬件维护。",
+                link: "css/about.html",
+                label: "查看关于我"
+            },
+            core: {
+                title: "[核心模块] 兴趣与持续力",
+                content: "兴趣驱动学习，持续关注新技术并通过项目沉淀能力与表达。",
+                link: "css/hobby.html",
+                label: "查看兴趣爱好"
+            }
+        };
+
+        spots.forEach(function (spot) {
+            spot.addEventListener("click", function () {
+                var item = profileMap[spot.dataset.part];
+                if (!item) return;
+                window.location.href = item.link;
+            });
+        });
+
+        var navEntry = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+        if (navEntry && navEntry.type === "reload") {
+            sessionStorage.removeItem("welcomeModalShown");
+        }
+        if (sessionStorage.getItem("welcomeModalShown") === "1") {
+            welcomeModal.classList.add("hidden");
+        }
+
+        function closeWelcomeModal() {
+            welcomeModal.classList.add("hidden");
+            sessionStorage.setItem("welcomeModalShown", "1");
+        }
+
+        welcomeClose.addEventListener("click", closeWelcomeModal);
+        welcomeModal.addEventListener("click", function (event) {
+            if (event.target === welcomeModal) closeWelcomeModal();
+        });
+    })();
+</script>
 
 </body>
 </html>
