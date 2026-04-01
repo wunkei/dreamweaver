@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>项目实践 - 智库与代码 [HEAD VIEW]</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Intellect & Code Output</h1>
+</header>
+
+<nav>
+    <a href="index.html">/root/首页</a>
+    <a href="project.html" class="active">/bin/项目实践</a>
+    <a href="about.html">/etc/关于我</a>
+    <a href="hobby.html">/home/兴趣爱好</a>
+    <a href="contact.html">/var/联系我</a>
+</nav>
+
+<div class="container">
+    <div class="view-marker">[HEAD VIEW - INTELLECT]</div>
+    <h2>技术栈与核心项目</h2>
+    
+    <p>你点击了我的“头部”，这里是我的知识库和代码产出。我专注于 Java, C++ 和 Python 的交叉应用，喜欢用代码实现自动化。</p>
+
+    <h3>1. 川大教务系统自动化选课矩阵 (Python + JS)</h3>
+    <p>为了解决选课拥堵问题，我独立开发了一套自动化方案：</p>
+    <ul>
+        <li><strong>前端注入：</strong> 编写 Tampermonkey (油猴) 脚本，利用 JavaScript 精准拦截网页网络请求，实现高频自动刷新与参数提交。</li>
+        <li><strong>本地 AI 验证码攻防：</strong> 使用 Python 搭建本地 Flask 服务器，集成 <code>ddddocr</code> 库，将前端抓取的验证码图片实时回传本地进行光学字符识别 (OCR)，实现全链路无人工干预的自动化抢课。</li>
+    </ul>
+
+    <h3>2. 高性能分子动力学模拟平台搭建 (Linux/Bash)</h3>
+    <p>在 WSL 环境下，成功从源码编译并运行了 GROMACS 分子动力学模拟软件。深入处理了复杂的路径依赖、环境变量配置及编译报错，掌握了科研级软件的部署能力。</p>
+
+    <h3>3. AI 算法与微调探索</h3>
+    <p>深入学习了 CNN, RNN 等神经网络架构，并对 Transformer 的注意力机制有深入理解，目前正在探索 LoRA 等大模型微调技术在特定场景下的应用。</p>
+</div>
+
+<footer>
+    <p>&copy; 2026 Wynn. Code compiled smoothly. 设计于 Dreamweaver.</p>
+</footer>
+
+</body>
+</html>
